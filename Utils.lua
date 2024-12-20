@@ -16,7 +16,7 @@ Utils.properties = {
     ["Fly"] = false
 };
 
-Utils.functions = {
+Utils.bindFunctions = {
     ["NoClipping"] = nil,
     ["Floating"] = nil,
     ["Flying"] = nil
@@ -27,6 +27,7 @@ function Utils:enable(property)
 
     if p ~= nil then
         Utils.properties[p] = true;
+        Utils.enableFunctions[p]();
     end
 end
 
@@ -35,6 +36,7 @@ function Utils:disable(property)
 
     if p ~= nil then
         Utils.properties[p] = false;
+        Utils.disableFunctions[p]();
     end
 end
 
