@@ -1,4 +1,4 @@
-local Utils = {};
+PPlocal Utils = {};
 
 local function findProperty(property)
     for i, v in pairs(Utils.properties) do
@@ -74,19 +74,19 @@ end
 function Utils:NoClip(player)
     Utils:enable("NoClip");
     wait(0.1)
-	   local function NoClipLoop(plr)
+    local function NoClipLoop(plr)
         local plr = player;
 
-		      if Utils.properties["NoClip"] == true and plr.Character ~= nil then
-			         for _, child in pairs(plr.Character:GetDescendants()) do
-				            if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= "TrollerPart" then
-					               child.CanCollide = false;
-				            end
-			         end
-		      end
-	   end
+        if Utils.properties["NoClip"] == true and plr.Character ~= nil then
+            for _, child in pairs(plr.Character:GetDescendants()) do
+                if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= "TrollerPart" then
+                    child.CanCollide = false;
+                end
+            end
+        end
+    end
 
-	   Utils:bind(NoClipLoop, Utils.services.RunService.Stepped, "NoClipping");
+    Utils:bind(NoClipLoop, Utils.services.RunService.Stepped, "NoClipping");
 end
 
 return Utils;
