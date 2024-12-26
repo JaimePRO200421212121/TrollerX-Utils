@@ -10,6 +10,37 @@ local function findProperty(property)
     return nil;
 end
 
+Utils.services = {
+    ["CoreGui"] = game:GetService("CoreGui"),
+    ["Players"] = game:GetService("Players"),
+    ["TextService"] = game:GetService("TextService"),
+    ["UserInputService"] = game:GetService("UserInputService"),
+    ["TweenService"] = game:GetService("TweenService"),
+    ["HttpService"] = game:GetService("HttpService"),
+    ["MarketplaceService"] = game:GetService("MarketplaceService"),
+    ["RunService"] = game:GetService("RunService"),
+    ["TeleportService"] = game:GetService("TeleportService"),
+    ["StarterGui"] = game:GetService("StarterGui"),
+    ["GuiService"] = game:GetService("GuiService"),
+    ["Lighting"] = game:GetService("Lighting"),
+    ["ContextActionService"] = game:GetService("ContextActionService"),
+    ["NetworkClient"] = game:GetService("NetworkClient"),
+    ["ReplicatedStorage"] = game:GetService("ReplicatedStorage"),
+    ["GroupService"] = game:GetService("GroupService"),
+    ["PathService"] = game:GetService("PathfindingService"),
+    ["SoundService"] = game:GetService("SoundService"),
+    ["Teams"] = game:GetService("Teams"),
+    ["StarterPlayer"] = game:GetService("StarterPlayer"),
+    ["InsertService"] = game:GetService("InsertService"),
+    ["ChatService"] = game:GetService("Chat"),
+    ["ProximityPromptService"] = game:GetService("ProximityPromptService"),
+    ["StatsService"] = game:GetService("Stats"),
+    ["MaterialService"] = game:GetService("MaterialService"),
+    ["AvatarEditorService"] = game:GetService("AvatarEditorService"),
+    ["TextChatService"] = game:GetService("TextChatService"),
+    ["VirtualUser"] = game:GetService("VirtualUser")
+};
+
 Utils.properties = {
     ["NoClip"] = false,
     ["Float"] = false,
@@ -38,6 +69,24 @@ function Utils:disable(property)
         Utils.properties[p] = false;
         Utils.disableFunctions[p]();
     end
+end
+
+function Utils:NoClip(player)
+    Utils:enable("NoClip");
+    wait(0.1)
+	   local function NoClipLoop(plr)
+        local plr = player;
+
+		      if Utils.properties["NoClip"] == true and plr.Character ~= nil then
+			         for _, child in pairs(plr.Character:GetDescendants()) do
+				            if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= "TrollerPart" then
+					               child.CanCollide = false;
+				            end
+			         end
+		      end
+	   end
+
+	   Utils:bind(NoClipLoop, Utils.services.RunService.Stepped, "NoClipping");
 end
 
 return Utils;
