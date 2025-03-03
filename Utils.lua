@@ -1,4 +1,4 @@
-PPlocal Utils = {};
+local Utils = {};
 
 local function findProperty(property)
     for i, v in pairs(Utils.properties) do
@@ -86,7 +86,9 @@ function Utils:NoClip(player)
         end
     end
 
-    Utils:bind(NoClipLoop, Utils.services.RunService.Stepped, "NoClipping");
+    Utils:bind(NoClipLoop, "NoClipping");
+
+    Utils.services.RunService.Stepped:Connect(NoClipLoop);
 end
 
 return Utils;
